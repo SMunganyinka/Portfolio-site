@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shakira Munganyinka's personal software engineering portfolio, featuring projects, experience, and contact form." />
+  <title>Shakira Munganyinka Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #ffffff;
+      --accent: #38bdf8;
+      --bg: #000000;
+      --text: #f1f1f1;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-top: 70px;
+    }
+
+    header, section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1, h2 {
+      color: var(--primary);
+    }
+
+    nav {
+      background: #000;
+      padding: 1rem;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    #nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: #f1f1f1;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 1rem;
+    }
+
+    .project, .experience {
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      background-color: #111;
+    }
+
+    ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 1rem auto;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+      border: 4px solid var(--accent);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05);
+    }
+
+    #home {
+      background: #000000;
+      text-align: center;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    #home h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    #home p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 1rem auto;
+    }
+
+    @media (max-width: 768px) {
+      #nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      #nav-links.show {
+        display: flex;
+      }
+
+      #menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+
+      .profile-pic {
+        width: 60%;
+        height: auto;
+      }
+
+      #home h1 {
+        font-size: 2rem;
+      }
+
+      #home p {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+    }
+
+    @media (min-width: 769px) {
+      #menu-toggle {
+        display: none;
+      }
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background-color: #111;
+      color: white;
+      font-size: 1rem;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: #1a1a1a;
+    }
+
+    .contact-icons {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .contact-icons a {
+      color: var(--accent);
+      font-size: 2rem;
+      margin: 0 1rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+      display: inline-block;
+    }
+
+    .contact-icons a:hover {
+      transform: scale(1.2);
+      color: #60d9ff;
+    }
+
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 18px;
+      cursor: pointer;
+      display: none;
+      z-index: 9999;
+    }
+
+    #modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #modal .box {
+      background: #222;
+      padding: 2rem;
+      border-radius: 10px;
+      color: white;
+      text-align: center;
+    }
+
+    #modal button {
+      margin-top: 1rem;
+      background: var(--accent);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+<nav>
+  <span id="menu-toggle">☰</span>
+  <div id="nav-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section id="home">
+  <h1>Hi, I'm Shakira Munganyinka</h1>
+  <img src="Munganyinka.jpeg" alt="Shakira Munganyinka" class="profile-pic" onerror="this.src='https://via.placeholder.com/180'" />
+  <p>A Software Engineer passionate about creative technology, problem-solving, and human-centered design.</p>
+  <a href="#projects" class="btn">View My Projects</a>
+  <a href="_Shakira_Munganyinka.pdf" class="btn" download>Download Resume</a>
+</section>
+
+<section id="about">
+  <h2>About Me</h2>
+  <p>I'm currently studying Software Engineering at African Leadership University and a graduate of Rwanda Coding Academy. I enjoy designing responsive, clean, and accessible web interfaces, and I'm constantly exploring new ways to solve real-world problems through code.</p>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+
+  <div class="project">
+    <h3>GPA Calculator</h3>
+    <p>A simple GPA Calculator web app.</p>
+    <ul>
+      <li>Tech Used: HTML, CSS, JavaScript</li>
+      <li>Features real-time GPA updates</li>
+    </ul>
+    <a href="https://smunganyinka.github.io/GPA-Calculator/" target="_blank">Live Demo</a>
+    <a href="https://github.com/SMunganyinka/GPA-Calculator" target="_blank">View Code</a>
+  </div>
+
+  <div class="project">
+    <h3>Submission Reminder App</h3>
+    <p>A shell script-based assignment reminder tool.</p>
+    <ul>
+      <li>Tech Used: Bash</li>
+      <li>Reads student submission statuses from a file</li>
+    </ul>
+    <a href="https://github.com/SMunganyinka/submission_reminder_app_SMunganyinka" target="_blank">View Code</a>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <ul>
+    <li>HTML, CSS, JavaScript</li>
+    <li>Effective Communication</li>
+    <li>Project Coordination, Logistics, Problem Solving</li>
+    <li>Microsoft Office, Canva, Graphic Design</li>
+  </ul>
+</section>
+
+<section id="experience">
+  <h2>Experience</h2>
+
+  <div class="experience">
+    <h3>Junior Software Engineer – MINAGRI</h3>
+    <p>June – Sept 2024 | Kigali</p>
+    <ul>
+      <li>Developed and maintained internal agricultural tech tools</li>
+      <li>Supported data analysis for national food security</li>
+    </ul>
+  </div>
+
+  <div class="experience">
+    <h3>Cashier – Amahoro Restaurant</h3>
+    <p>Sept 2022 – April 2024 | Kigali</p>
+    <ul>
+      <li>Handled customer transactions and cash reports</li>
+      <li>Assisted with inventory and order coordination</li>
+    </ul>
+  </div>
+</section>
+
+<section id="education">
+  <h2>Education</h2>
+  <div class="experience">
+    <h3>African Leadership University</h3>
+    <p>2023 – Present | BSc in Software Engineering</p>
+  </div>
+  <div class="experience">
+    <h3>Rwanda Coding Academy</h3>
+    <p>2019 – 2022 | National Certificate in Software Development and Embedded Systems.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Me</h2>
+  <form id="contact-form" novalidate>
+    <label for="name">Name*</label><br />
+    <input type="text" id="name" name="name" required placeholder="Your Name" /><br /><br />
+
+    <label for="email">Email*</label><br />
+    <input type="email" id="email" name="email" required placeholder="you@example.com" /><br /><br />
+
+    <label for="message">Message*</label><br />
+    <textarea id="message" name="message" rows="5" required placeholder="Your message here..."></textarea><br /><br />
+
+    <button type="submit" class="btn">Send Message</button>
+    <p id="form-status"></p>
+  </form>
+</section>
+
+<div class="contact-icons">
+  <a href="mailto:s.munganyin@alustudent.com" target="_blank" aria-label="Email"><i class="fas fa-envelope"></i></a>
+  <a href="https://github.com/SMunganyinka" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+  <a href="https://www.linkedin.com/in/munganyinka-shakira-6a026a208/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+</div>
+
+<button id="scrollTopBtn" title="Go to top">↑</button>
+
+<div id="modal">
+  <div class="box">
+    <p>✅ Thank you! Your message has been sent.</p>
+    <button onclick="document.getElementById('modal').style.display='none'">Close</button>
+  </div>
+</div>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const links = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('show');
+  });
+
+  // Hide nav on mobile after clicking link
+  document.querySelectorAll('#nav-links a').forEach(link => {
+    link.addEventListener('click', () => links.classList.remove('show'));
+  });
+
+  // Scroll to top button
+  const topBtn = document.getElementById('scrollTopBtn');
+  window.onscroll = () => {
+    topBtn.style.display = window.scrollY > 100 ? 'block' : 'none';
+  };
+  topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Contact form
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!name || !email || !message) {
+      document.getElementById('form-status').textContent = 'Please fill in all fields.';
+      document.getElementById('form-status').style.color = 'orange';
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      document.getElementById('form-status').textContent = 'Invalid email.';
+      document.getElementById('form-status').style.color = 'orange';
+      return;
+    }
+
+    form.reset();
+    document.getElementById('form-status').textContent = '';
+    document.getElementById('modal').style.display = 'flex';
+  });
+</script>
+
+</body>
+</html>

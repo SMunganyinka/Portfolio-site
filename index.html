@@ -243,6 +243,41 @@
       color: white;
       cursor: pointer;
     }
+    .slider-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.slider-container img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+
+
+.slider-controls {
+  margin-top: 1rem;
+}
+
+.slider-controls button {
+  padding: 0.6rem 1.2rem;
+  margin: 0 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--accent);
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.slider-controls button:hover {
+  background-color: #0ea5e9;
+}
+
 
   </style>
 </head>
@@ -275,7 +310,14 @@
 </section>
 
 <section id="projects">
-  <h2>Projects</h2>
+  <h2>Projects and Designs</h2>
+<div class="slider-container">
+  <img id="slider-img" src="project1.jpg" alt="The designs I make">
+  <div class="slider-controls">
+    <button onclick="prevImage()">← Prev</button>
+    <button onclick="nextImage()">Next →</button>
+  </div>
+</div>
 
   <div class="project">
     <h3>GPA Calculator</h3>
@@ -420,6 +462,29 @@
     document.getElementById('form-status').textContent = '';
     document.getElementById('modal').style.display = 'flex';
   });
+  const sliderImages = [
+    'project1.jpg',
+    'project2.jpg',
+    'project3.jpg',
+    'project4.jpg'
+  ];
+
+  let currentImageIndex = 0;
+
+  function showImage(index) {
+    const imgElement = document.getElementById('slider-img');
+    imgElement.src = sliderImages[index];
+  }
+
+  function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % sliderImages.length;
+    showImage(currentImageIndex);
+  }
+
+  function prevImage() {
+    currentImageIndex = (currentImageIndex - 1 + sliderImages.length) % sliderImages.length;
+    showImage(currentImageIndex);
+  }
 </script>
 
 </body>
